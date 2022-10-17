@@ -1,0 +1,13 @@
+version: "3.8"
+services:
+  geo-postgres:
+    image: postgis/postgis:13-master
+    ports:
+      - '5432:5432'
+    environment:
+      POSTGIS_GDAL_ENABLED_DRIVERS: ENABLE_ALL
+      POSTGRES_DB: geo-postgres
+      POSTGRES_USER: username
+      POSTGRES_PASSWORD: mysecretpassword
+      POSTGRES_HOST: localhost
+      POSTGRES_PORT: 5432

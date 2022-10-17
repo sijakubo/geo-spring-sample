@@ -1,0 +1,51 @@
+# dependencies
+.gradle
+node_modules
+
+# compiled outputs
+**/build/
+/**/out/
+
+/artifacts
+
+/kws/dist
+/public
+/server/i18n
+documentation
+tmp
+
+# caches
+.gradletasknamecache
+/kws/.angular
+
+# coverage report
+coverage
+
+# jest reports
+junit.xml
+
+# IDEs and editors
+.idea
+*.iml
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+
+# misc
+npm-debug.log
+
+# LibreOffice
+.~lock*
+
+# MS Excel Temp Files
+~$*.xlsx
+
+# System Files
+.DS_Store
+Thumbs.db
+
+# Cypress Downloads
+/**/fixtures/downloads/*
+/**/cypress/downloads/*

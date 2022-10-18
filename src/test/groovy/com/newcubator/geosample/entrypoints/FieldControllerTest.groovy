@@ -12,10 +12,17 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
 import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.boot.test.util.TestPropertyValues
+import org.springframework.context.ApplicationContextInitializer
+import org.springframework.context.ConfigurableApplicationContext
 import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
+import org.springframework.test.context.ContextConfiguration
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.transaction.annotation.Transactional
+import org.testcontainers.containers.JdbcDatabaseContainer
+import org.testcontainers.containers.PostgisContainerProvider
+import spock.lang.Shared
 
 import static de.xm.yangyin.FileSnapshots.current
 import static de.xm.yangyin.FileSnapshots.snapshot
@@ -25,7 +32,28 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 @SpringBootTest
 @AutoConfigureMockMvc
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
+@ContextConfiguration(initializers = [Initializer.class])
 class FieldControllerTest extends IntegrationTest {
+
+  @Shared
+  public static JdbcDatabaseContainer postgreSQLContainer = new PostgisContainerProvider()
+    .newInstance()
+    .withDatabaseName("integration-tests-db")
+    .withUsername("sa")
+    .withPassword("sa");
+
+
+  static class Initializer implements ApplicationContextInitializer<ConfigurableApplicationContext> {
+
+    void initialize(ConfigurableApplicationContext configurableApplicationContext) {
+      postgreSQLContainer.start()
+      TestPropertyValues.of(
+        "spring.datasource.url=" + postgreSQLContainer.getJdbcUrl(),
+        "spring.datasource.username=" + postgreSQLContainer.getUsername(),
+        "spring.datasource.password=" + postgreSQLContainer.getPassword()
+      ).applyTo(configurableApplicationContext.getEnvironment());
+    }
+  }
 
   @Autowired
   MockMvc mockMvc

@@ -1,12 +1,12 @@
 package com.newcubator.geosample.domain.field;
 
+import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import org.geolatte.geom.G2D;
 import org.geolatte.geom.Polygon;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
-import javax.validation.constraints.NotNull;
 
 @Service
 @RequiredArgsConstructor

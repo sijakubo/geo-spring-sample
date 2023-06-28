@@ -43,7 +43,8 @@ public class FieldController {
         Field createdField = fieldCreate.handle(
             createResource.id(),
             createResource.name(),
-            createResource.geometry()
+            createResource.geometry(),
+            createResource.properties()
         );
         return ResponseEntity.ok(new FieldResource(createdField));
     }

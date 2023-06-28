@@ -73,7 +73,8 @@ class FieldControllerTest extends IntegrationTest {
             .add(5.8208837124389, 51.0596004663904)
             .toPositionSequence(),
           CoordinateReferenceSystems.WGS84
-        )
+        ),
+        Set.of("property1")
       ))
 
     when:
@@ -104,7 +105,10 @@ class FieldControllerTest extends IntegrationTest {
                     [5.640474719301864, 51.54027129374816],
                     [5.636421388870787, 51.540107133536]
                 ]]
-            }
+            },
+            "properties": [
+              "property1", "property2"
+            ]
         }"""))
         .andReturn().response
 
@@ -127,7 +131,8 @@ class FieldControllerTest extends IntegrationTest {
             .add(5.8208837124389, 51.0596004663904)
             .toPositionSequence(),
           CoordinateReferenceSystems.WGS84
-        )
+        ),
+        Set.of("property1")
       ))
 
     when:
@@ -169,7 +174,8 @@ class FieldControllerTest extends IntegrationTest {
             .add(5.6385371559564135, 51.54096478133687)
             .toPositionSequence(),
           CoordinateReferenceSystems.WGS84
-        )
+        ),
+        Set.of("property1")
       ))
 
     when:

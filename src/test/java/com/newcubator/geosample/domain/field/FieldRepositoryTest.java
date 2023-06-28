@@ -1,5 +1,6 @@
 package com.newcubator.geosample.domain.field;
 
+import java.util.Set;
 import java.util.UUID;
 import org.geolatte.geom.G2D;
 import org.geolatte.geom.Polygon;
@@ -58,7 +59,7 @@ class FieldRepositoryTest {
 
         String testFieldName = "test field";
         Assertions.assertTrue(fieldRepository.isValid(testFieldName, geometry));
-        fieldRepository.save(new Field(UUID.randomUUID(), testFieldName, geometry));
+        fieldRepository.save(new Field(UUID.randomUUID(), testFieldName, geometry, Set.of("test", "test2")));
 
         Assertions.assertFalse(fieldRepository.isValid(testFieldName, geometry));
     }

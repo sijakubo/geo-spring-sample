@@ -41,5 +41,9 @@
                 ]
             ]
         ]
-    }
+    },
+    "properties": [
+        "property2",
+        "property1"
+    ]
 }

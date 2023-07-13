@@ -1,9 +1,8 @@
-package com.newcubator.geosample.entrypoints;
+package com.newcubator.geosample.field.entrypoints;
 
-import com.newcubator.geosample.domain.field.Field;
-import com.newcubator.geosample.domain.field.FieldCreate;
-import com.newcubator.geosample.domain.field.FieldRepository;
-import com.newcubator.geosample.entrypoints.resources.FieldResource;
+import com.newcubator.geosample.field.domain.FieldCreate;
+import com.newcubator.geosample.field.domain.FieldRepository;
+import com.newcubator.geosample.field.domain.Field;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

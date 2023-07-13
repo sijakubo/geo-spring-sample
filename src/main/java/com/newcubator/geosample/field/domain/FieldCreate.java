@@ -1,4 +1,4 @@
-package com.newcubator.geosample.domain.field;
+package com.newcubator.geosample.field.domain;
 
 import jakarta.validation.constraints.NotNull;
 import java.util.Set;
@@ -17,10 +17,9 @@ public class FieldCreate {
     private final FieldRepository fieldRepository;
 
     public Field handle(@NotNull UUID id, @NotNull String name, @NotNull Polygon<G2D> geometry, @NotNull Set<String> properties) {
-
         if (!fieldRepository.isValid(name, geometry)) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid create field request");
         }
-        return fieldRepository.save(new Field(id, name, geometry, properties));
+        return fieldRepository.save(new Field(id, name, geometry, properties, null));
     }
 }

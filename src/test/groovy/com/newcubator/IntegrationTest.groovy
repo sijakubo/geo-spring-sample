@@ -1,4 +1,4 @@
-package com.newcubator.geosample
+package com.newcubator
 
 import groovy.json.JsonOutput
 import groovy.json.JsonSlurper

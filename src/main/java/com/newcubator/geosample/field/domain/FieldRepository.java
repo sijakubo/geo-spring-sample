@@ -1,4 +1,4 @@
-package com.newcubator.geosample.domain.field;
+package com.newcubator.geosample.field.domain;
 
 import java.util.UUID;
 import org.geolatte.geom.Geometry;

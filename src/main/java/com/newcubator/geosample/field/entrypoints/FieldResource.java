@@ -1,6 +1,6 @@
-package com.newcubator.geosample.entrypoints.resources;
+package com.newcubator.geosample.field.entrypoints;
 
-import com.newcubator.geosample.domain.field.Field;
+import com.newcubator.geosample.field.domain.Field;
 import java.util.Set;
 import org.geolatte.geom.G2D;
 import org.geolatte.geom.Polygon;

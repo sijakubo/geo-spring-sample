@@ -1,9 +1,8 @@
-package com.newcubator.geosample.entrypoints
+package com.newcubator.geosample.field.entrypoints
 
-
-import com.newcubator.geosample.IntegrationTest
-import com.newcubator.geosample.domain.field.Field
-import com.newcubator.geosample.domain.field.FieldRepository
+import com.newcubator.IntegrationTest
+import com.newcubator.geosample.field.domain.Field
+import com.newcubator.geosample.field.domain.FieldRepository
 import de.xm.yangyin.Comparisons
 import org.geolatte.geom.G2D
 import org.geolatte.geom.Polygon
@@ -12,17 +11,12 @@ import org.geolatte.geom.crs.CoordinateReferenceSystems
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
 import org.springframework.boot.test.context.SpringBootTest
-import org.springframework.boot.test.util.TestPropertyValues
-import org.springframework.context.ApplicationContextInitializer
-import org.springframework.context.ConfigurableApplicationContext
 import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
+import org.springframework.modulith.test.ApplicationModuleTest
 import org.springframework.test.context.ContextConfiguration
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.transaction.annotation.Transactional
-import org.testcontainers.containers.JdbcDatabaseContainer
-import org.testcontainers.containers.PostgisContainerProvider
-import spock.lang.Shared
 
 import static de.xm.yangyin.FileSnapshots.current
 import static de.xm.yangyin.FileSnapshots.snapshot
@@ -30,29 +24,10 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post
 
 @SpringBootTest
+@ApplicationModuleTest(extraIncludes = "farmer")
 @AutoConfigureMockMvc
-@ContextConfiguration(initializers = [Initializer.class])
+@ContextConfiguration
 class FieldControllerTest extends IntegrationTest {
-
-  @Shared
-  public static JdbcDatabaseContainer postgreSQLContainer = new PostgisContainerProvider()
-    .newInstance()
-    .withDatabaseName("integration-tests-db")
-    .withUsername("sa")
-    .withPassword("sa");
-
-
-  static class Initializer implements ApplicationContextInitializer<ConfigurableApplicationContext> {
-
-    void initialize(ConfigurableApplicationContext configurableApplicationContext) {
-      postgreSQLContainer.start()
-      TestPropertyValues.of(
-        "spring.datasource.url=" + postgreSQLContainer.getJdbcUrl(),
-        "spring.datasource.username=" + postgreSQLContainer.getUsername(),
-        "spring.datasource.password=" + postgreSQLContainer.getPassword()
-      ).applyTo(configurableApplicationContext.getEnvironment());
-    }
-  }
 
   @Autowired
   MockMvc mockMvc
@@ -74,7 +49,8 @@ class FieldControllerTest extends IntegrationTest {
             .toPositionSequence(),
           CoordinateReferenceSystems.WGS84
         ),
-        Set.of("property1")
+        Set.of("property1"),
+        null
       ))
 
     when:
@@ -132,7 +108,8 @@ class FieldControllerTest extends IntegrationTest {
             .toPositionSequence(),
           CoordinateReferenceSystems.WGS84
         ),
-        Set.of("property1")
+        Set.of("property1"),
+        null
       ))
 
     when:
@@ -175,7 +152,8 @@ class FieldControllerTest extends IntegrationTest {
             .toPositionSequence(),
           CoordinateReferenceSystems.WGS84
         ),
-        Set.of("property1")
+        Set.of("property1"),
+        null
       ))
 
     when:
